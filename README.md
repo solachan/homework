@@ -30,11 +30,17 @@
     - 配置数据库连接信息，例如：
 
 ### properties
-spring.datasource.url=jdbc:mysql://localhost:3306/incident_manage?useSSL=false&serverTimezone=UTC  
-spring.datasource.username=root  
-spring.datasource.password=your_password   
-spring.jpa.hibernate.ddl-auto=update   
-spring.jpa.show-sql=true  
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.h2.console.enabled=true
+spring.cache.type=caffeine
+spring.cache.caffeine.spec=maximumSize=500,expireAfterAccess=60s
+logging.level.org.springframework=DEBUG 
 
 ## 项目启动
 1. **克隆项目**：  
