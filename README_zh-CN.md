@@ -1,25 +1,25 @@
-# Project Name
-Incident Management System
+## 项目名称
+事件管理系统 (Incident manage System)
 
 ## 项目概述
-The Incident Management System is an application designed to manage and track various types of incidents. The system supports the creation, querying, updating, and deletion of incidents, ensuring that each incident has a unique fingerprint identifier to prevent duplicate incidents.
+事件管理系统是一个用于管理和跟踪各种类型事件的应用程序。系统支持事件的创建、查询、更新和删除操作，并确保每个事件都有一个唯一的指纹标识，以避免重复事件的创建。
 
-## Main Features
-- **Incident Creation**: Users can create new incidents, and the system will automatically generate a unique fingerprint.
-- **Incident Querying**: Users can query incidents based on different criteria, including paginated queries.
-- **Incident Updating**: Users can update existing incident information.
-- **Incident Deletion**: Users can delete incidents that are no longer needed.
+## 主要功能
+- **事件创建**：用户可以创建新的事件，系统会自动生成一个唯一的指纹标识。
+- **事件查询**：用户可以根据不同的条件查询事件，包括分页查询。
+- **事件更新**：用户可以更新已有的事件信息。
+- **事件删除**：用户可以删除不再需要的事件。
+- **唯一性检查**：在创建事件时，系统会检查指纹是否已经存在，如果存在则抛出异常。
 
-## Technology Stack
-- **Programming Language**: Java
-- **Framework**: Spring Boot
-- **Persistence Layer**: Spring Data JPA
-- **Database**: H2 In-Memory Database
-- **Build Tool**: Maven
-- **Version Control**: Git
+## 技术栈
+- **编程语言**：Java
+- **框架**：Spring Boot
+- **持久层**：Spring Data JPA
+- **数据库**：H2内存数据库
+- **构建工具**：Maven
+- **版本控制**：Git
 
-
-## Project Structure
+## 项目结构
 ``` 
 │  .gitattributes
 │  .gitignore
@@ -83,12 +83,12 @@ The Incident Management System is an application designed to manage and track va
                             IncidentApplicationTest.java
 ```
 
-## Development Environment Setup
-1. **Install Java Development Kit (JDK)**: Ensure JDK 8 or higher is installed.
-2. **Install Maven**: Ensure Maven 3.6 or higher is installed.
-3. **Configure Database Connection**:
-   - Open the `src/main/resources/application.properties` file.
-   - Configure the database connection details, for example:
+## 开发环境配置
+1. **安装 Java Development Kit (JDK)**：确保安装了 JDK 8 或更高版本。
+2. **安装 Maven**：确保安装了 Maven 3.6 或更高版本。
+3. **配置数据库连接**：
+    - 打开 `src/main/resources/application.properties` 文件。
+    - 配置数据库连接信息，例如：
 
 ### properties
 spring.datasource.url=jdbc:h2:mem:testdb
@@ -101,34 +101,28 @@ spring.jpa.show-sql=true
 spring.h2.console.enabled=true
 spring.cache.type=caffeine
 spring.cache.caffeine.spec=maximumSize=500,expireAfterAccess=60s
-logging.level.org.springframework=DEBUG 
+logging.level.org.springframework=DEBUG
 
-## Project Startup
-1. **Clone the Project**:
-```
-sh   
-git clone https://github.com/solachan/homework.git
-cd incident
-```
+## 项目启动
+1. **克隆项目**：  
+   sh   
+   git clone https://github.com/solachan/homework.git
+   cd incident
 
-2. **Compile the Project**:
-```
-sh  
-mvn clean install  
-```
+2. **编译项目**：
+   sh  
+   mvn clean install
 
-3. **Run the Project**:
-```
-sh  
-mvn spring-boot:run  
-```
+3. **运行项目**：
+   sh  
+   mvn spring-boot:run
 
-4. **Access the Application**:
-   - Open a browser and navigate to `http://localhost:8080/incident`.
+4. **访问应用**：
+    - 打开浏览器，访问 `http://localhost:8080/incident`。
 
-## API Documentation
+## API 文档
 
-### Create Incident
+### 创建事件
 - **URL**: `/incidents`
 - **Method**: `POST`
 - **Request Body**:
@@ -141,14 +135,14 @@ mvn spring-boot:run
 { "id": 1, "type": "Error", "title": "Database Connection Failed", "description": "The database connection failed due to incorrect credentials.", "status": "Open", "fingerprint": "generated_fingerprint" }
 ```
 
-### Query Incidents
+### 查询事件
 - **URL**: `/incidents`
 - **Method**: `GET`
 - **Response**:
 ```
 [ { "id": 1, "type": "Error", "title": "Database Connection Failed", "description": "The database connection failed due to incorrect credentials.", "status": "Open", "fingerprint": "generated_fingerprint" } ]
 ```
-### Update Incident
+### 更新事件
 - **URL**: `/incidents/{id}`
 - **Method**: `PUT`
 - **Request Body**:
@@ -159,45 +153,44 @@ mvn spring-boot:run
 ```
 { "id": 1, "type": "Error", "title": "Database Connection Failed", "description": "The database connection failed due to incorrect credentials.", "status": "Closed", "fingerprint": "generated_fingerprint" }
 ```
-### Delete Incident
+### 删除事件
 - **URL**: `/incidents/{id}`
 - **Method**: `DELETE`
 - **Response**: No content (204)
-- **DuplicateFingerprintException**: Thrown when attempting to create an incident with the same fingerprint.
+- **DuplicateFingerprintException**：当尝试创建具有相同指纹的事件时，系统会抛出此异常。
 - **Response**:
 ```
 { "timestamp": "2023-10-01T12:34:56.789+00:00", "status": 400, "error": "Bad Request", "message": "Incident with the same fingerprint already exists.", "path": "/incidents" }
 ```
-## Testing
-- **Unit Tests**: Use JUnit and Mockito for unit testing.
-- **Integration Tests**: Use Spring Boot Test for integration testing.
+## 测试
+- **单元测试**：使用 JUnit 和 Mockito 进行单元测试。
+- **集成测试**：使用 Spring Boot Test 进行集成测试。
 
-## Deployment Guide
-1. **Package the Project**:
+## 部署指南
+1. **打包项目**：
 ```
 sh  
 mvn clean package -Dmaven.test.skip=true
 ```
-2. **Run the JAR File**:
+2. **运行 JAR 文件**：
 ```
 sh   
 java -jar target/incident-manage-system-0.0.1-SNAPSHOT.jar
 ```
-3. **Docker Deployment** (Optional):
-   - Create a Dockerfile:
+3. **Docker 部署**（可选）：
+    - 创建 Dockerfile：
 ```
 dockerfile  
 FROM openjdk:17-jdk-slim  
-COPY target/incident-manage-system-0.0.1-SNAPSHOT.jar /app/incident-manage-system.jar  
-WORKDIR /app 
+COPY target/incident-manage-system-0.0.1-SNAPSHOT.jar /app/incident-manage-system.jar WORKDIR /app  
 CMD ["java", "-jar", "incident-manage-system.jar"]
 ```
-- Build the Docker Image:
+- 构建 Docker 镜像：
 ```
 sh  
 docker build -t incident-manage-system .
 ```
-- Run the Docker Container:
+- 运行 Docker 容器：
 ```
 sh  
 docker run -p 8080:8080 incident-manage-system
