@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 /**
  * (Incident)表服务接口
  *
- * @author makejava
+ * @author xiepuxin
  * @since 2024-12-14 22:43:05
  */
 public interface IncidentService {

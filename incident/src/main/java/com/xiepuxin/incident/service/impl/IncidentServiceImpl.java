@@ -3,6 +3,7 @@ package com.xiepuxin.incident.service.impl;
 import com.xiepuxin.incident.dto.IncidentDTO;
 import com.xiepuxin.incident.entity.Incident;
 import com.xiepuxin.incident.dao.IncidentDao;
+import com.xiepuxin.incident.enums.StatusEnum;
 import com.xiepuxin.incident.exception.DuplicateFingerprintException;
 import com.xiepuxin.incident.exception.ResourceNotFoundException;
 import com.xiepuxin.incident.service.IncidentService;
@@ -22,7 +23,7 @@ import java.util.Date;
 /**
  * (Incident)表服务实现类
  *
- * @author makejava
+ * @author xiepuxin
  * @since 2024-12-14 22:43:08
  */
 @Service("incidentService")
@@ -67,6 +68,11 @@ public class IncidentServiceImpl implements IncidentService {
         Incident entity = new Incident();
         BeanUtils.copyProperties(incident,entity);
 
+        //检测状态是否合法
+        //check if status is legal
+        if(!StatusEnum.containsCode(incident.getStatus())){
+            throw new IllegalArgumentException("Invalid status.");
+        }
         //相同指纹的事件看做是同一个
         // Generate fingerprint
         String fingerprint = entity.generateFingerprint();

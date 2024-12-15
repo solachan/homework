@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * (Incident)实体类
  *
- * @author makejava
+ * @author xiepuxin
  * @since 2024-12-14 23:44:03
  */
 @Entity

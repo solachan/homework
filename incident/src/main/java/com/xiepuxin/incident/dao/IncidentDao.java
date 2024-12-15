@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
  * (Incident)表数据库访问层
  *
- * @author makejava
+ * @author xiepuxin
  * @since 2024-12-14 22:42:59
  */
 @Repository

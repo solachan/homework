@@ -2,6 +2,7 @@ package com.xiepuxin.incident.controller;
 
 import com.xiepuxin.incident.dto.IncidentDTO;
 import com.xiepuxin.incident.entity.Incident;
+import com.xiepuxin.incident.enums.StatusEnum;
 import com.xiepuxin.incident.exception.ResourceNotFoundException;
 import com.xiepuxin.incident.model.R;
 import com.xiepuxin.incident.service.IncidentService;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * (Incident)表控制层
  *
- * @author makejava
+ * @author xiepuxin
  * @since 2024-12-14 22:42:57
  */
 @RestController
@@ -59,9 +60,9 @@ public class IncidentController {
     @ResponseBody
     public R<Incident> queryById(@PathVariable("id") Long id) {
         Incident incident = this.incidentService.queryById(id);
-        if (incident == null) {
-            return R.fail("找不到该资源");
-        }
+        if(incident == null){
+            throw new ResourceNotFoundException("Incident not found with id: " + id);
+        };
         return R.ok(incident);
     }
 
@@ -73,6 +74,12 @@ public class IncidentController {
      */
     @PostMapping
     public R<Incident> add(@Validated(AddGroup.class) @RequestBody IncidentDTO incident) {
+        //检测状态是否合法
+        //check if status is legal
+        if(!StatusEnum.containsCode(incident.getStatus())){
+            throw new IllegalArgumentException("Invalid status.");
+        }
+
         return R.ok(this.incidentService.insert(incident));
     }
 
@@ -88,6 +95,11 @@ public class IncidentController {
         if(existingIncident == null){
             throw new ResourceNotFoundException("Incident not found with id: " + id);
         };
+        //检测状态是否合法
+        //check if status is legal
+        if(!StatusEnum.containsCode(incident.getStatus())){
+            throw new IllegalArgumentException("Invalid status.");
+        }
         incident.setId(id);
         return R.ok(this.incidentService.update(incident));
     }
