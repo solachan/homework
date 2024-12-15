@@ -123,44 +123,115 @@ logging.level.org.springframework=DEBUG
 ## API 文档
 
 ### 创建事件
-- **URL**: `/incidents`
+- **URL**: `/incident`
 - **Method**: `POST`
 - **Request Body**:
 
 ```
-{ "type": "Error", "title": "Database Connection Failed", "description": "The database connection failed due to incorrect credentials.", "status": "Open" }
+{
+     "type": "Error",
+     "title": "Database Connection Failed",
+     "description": "The database connection failed due to incorrect credentials.",
+     "status": 0,
+}
 ```
 - **Response**:
 ```
-{ "id": 1, "type": "Error", "title": "Database Connection Failed", "description": "The database connection failed due to incorrect credentials.", "status": "Open", "fingerprint": "generated_fingerprint" }
+{
+    "code": 200,
+    "msg": "操作成功",
+    "data": {
+        "id": 1,
+        "type": "Error",
+        "title": "Database Connection Failed",
+        "description": "The database connection failed due to incorrect credentials.",
+        "status": 0,
+        "time": "2024-12-15 16:21:13",
+        "fingerprint": "fdff58e8bd76198ba0b67a0815dd4718"
+    },
+    "traceId": null
+}
 ```
 
 ### 查询事件
-- **URL**: `/incidents`
+- **URL**: `/incident`
 - **Method**: `GET`
 - **Response**:
 ```
-[ { "id": 1, "type": "Error", "title": "Database Connection Failed", "description": "The database connection failed due to incorrect credentials.", "status": "Open", "fingerprint": "generated_fingerprint" } ]
+{
+    "code": 200,
+    "msg": "操作成功",
+    "data": {
+        "links": [
+            {
+                "rel": "self",
+                "href": "http://localhost:8080/incident?pageNum=1&pageSize=10&page=0&size=20&sort=id,desc"
+            }
+        ],
+        "content": [
+            {
+                "id": 1,
+                "type": "dolor do non est",
+                "title": "生你干系走化",
+                "description": "表任国容养可员军成单江她青近样置完十。必状以花元术同同山律场类界常而太海。济据引间想社织示能数作容查。快属果处些证果科员色响京府代。",
+                "status": 0,
+                "time": "2024-12-15 16:21:13",
+                "fingerprint": "fdff58e8bd76198ba0b67a0815dd4718",
+                "links": []
+            }
+        ],
+        "page": {
+            "size": 20,
+            "totalElements": 1,
+            "totalPages": 1,
+            "number": 0
+        }
+    },
+    "traceId": null
+}
 ```
 ### 更新事件
-- **URL**: `/incidents/{id}`
+- **URL**: `/incident/{id}`
 - **Method**: `PUT`
 - **Request Body**:
 ```
-{ "type": "Error", "title": "Database Connection Failed", "description": "The database connection failed due to incorrect credentials.", "status": "Closed" }
+{
+    "type": "et do occaecat mollit cillum",
+    "title": "引龙员意置",
+    "description": "容院更号头步细红育技队还花论那立团严。外到组即些如听治集不教群知运己质。政到油油美直龙清打大取选常放红。无油象很技深眼动别今育调生化石才。",
+    "status": 1
+}
 ```
 - **Response**:
 ```
-{ "id": 1, "type": "Error", "title": "Database Connection Failed", "description": "The database connection failed due to incorrect credentials.", "status": "Closed", "fingerprint": "generated_fingerprint" }
+{
+    "code": 200,
+    "msg": "操作成功",
+    "data": {
+        "id": 1,
+        "type": "et do occaecat mollit cillum",
+        "title": "引龙员意置",
+        "description": "容院更号头步细红育技队还花论那立团严。外到组即些如听治集不教群知运己质。政到油油美直龙清打大取选常放红。无油象很技深眼动别今育调生化石才。",
+        "status": 1,
+        "time": "2024-12-15 16:24:18",
+        "fingerprint": "58b949986b2ff0eec533c515e86ccbbc"
+    },
+    "traceId": null
+}
 ```
 ### 删除事件
-- **URL**: `/incidents/{id}`
+- **URL**: `/incident/{id}`
 - **Method**: `DELETE`
 - **Response**: No content (204)
 - **DuplicateFingerprintException**：当尝试创建具有相同指纹的事件时，系统会抛出此异常。
 - **Response**:
 ```
-{ "timestamp": "2023-10-01T12:34:56.789+00:00", "status": 400, "error": "Bad Request", "message": "Incident with the same fingerprint already exists.", "path": "/incidents" }
+{
+    "code": 200,
+    "msg": "操作成功",
+    "data": null,
+    "traceId": null
+}
 ```
 ## 测试
 - **单元测试**：使用 JUnit 和 Mockito 进行单元测试。
