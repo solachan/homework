@@ -57,12 +57,12 @@ sh
 mvn spring-boot:run  
 
 4. **访问应用**：
-    - 打开浏览器，访问 `http://localhost:8080/api/incidents`。
+    - 打开浏览器，访问 `http://localhost:8080/incident`。
 
 ## API 文档
 
 ### 创建事件
-- **URL**: `/api/incidents`
+- **URL**: `/incidents`
 - **Method**: `POST`
 - **Request Body**:
 
@@ -75,14 +75,14 @@ mvn spring-boot:run
 ```
 
 ### 查询事件
-- **URL**: `/api/incidents`
+- **URL**: `/incidents`
 - **Method**: `GET`
 - **Response**:
 ```
 [ { "id": 1, "type": "Error", "title": "Database Connection Failed", "description": "The database connection failed due to incorrect credentials.", "status": "Open", "fingerprint": "generated_fingerprint" } ]
 ```
 ### 更新事件
-- **URL**: `/api/incidents/{id}`
+- **URL**: `/incidents/{id}`
 - **Method**: `PUT`
 - **Request Body**:
 ```
@@ -93,13 +93,13 @@ mvn spring-boot:run
 { "id": 1, "type": "Error", "title": "Database Connection Failed", "description": "The database connection failed due to incorrect credentials.", "status": "Closed", "fingerprint": "generated_fingerprint" }
 ```
 ### 删除事件
-- **URL**: `/api/incidents/{id}`
+- **URL**: `/incidents/{id}`
 - **Method**: `DELETE`
 - **Response**: No content (204)
 - **DuplicateFingerprintException**：当尝试创建具有相同指纹的事件时，系统会抛出此异常。
 - **Response**:
 ```
-{ "timestamp": "2023-10-01T12:34:56.789+00:00", "status": 400, "error": "Bad Request", "message": "Incident with the same fingerprint already exists.", "path": "/api/incidents" }
+{ "timestamp": "2023-10-01T12:34:56.789+00:00", "status": 400, "error": "Bad Request", "message": "Incident with the same fingerprint already exists.", "path": "/incidents" }
 ```
 ## 测试
 - **单元测试**：使用 JUnit 和 Mockito 进行单元测试。
@@ -109,7 +109,7 @@ mvn spring-boot:run
 1. **打包项目**：
 ```
 sh  
-mvn clean package
+mvn clean package -Dmaven.test.skip=true
 ```
 2. **运行 JAR 文件**：
 ```
