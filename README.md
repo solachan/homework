@@ -1,5 +1,5 @@
 ## 项目名称
-事件管理系统 (Incident Management System)
+事件管理系统 (Incident manage System)
 
 ## 项目概述
 事件管理系统是一个用于管理和跟踪各种类型事件的应用程序。系统支持事件的创建、查询、更新和删除操作，并确保每个事件都有一个唯一的指纹标识，以避免重复事件的创建。
@@ -30,7 +30,7 @@
     - 配置数据库连接信息，例如：
 
 ### properties
-spring.datasource.url=jdbc:mysql://localhost:3306/incident_management?useSSL=false&serverTimezone=UTC  
+spring.datasource.url=jdbc:mysql://localhost:3306/incident_manage?useSSL=false&serverTimezone=UTC  
 spring.datasource.username=root  
 spring.datasource.password=your_password   
 spring.jpa.hibernate.ddl-auto=update   
@@ -39,8 +39,8 @@ spring.jpa.show-sql=true
 ## 项目启动
 1. **克隆项目**：  
 sh   
-git clone https://github.com/your-repo/incident-management-system.git  
-cd incident-management-system
+git clone https://github.com/solachan/homework.git
+cd incident
 
 2. **编译项目**：
 sh  
@@ -108,20 +108,20 @@ mvn clean package
 2. **运行 JAR 文件**：
 ```
 sh   
-java -jar target/incident-management-system-0.0.1-SNAPSHOT.jar
+java -jar target/incident-manage-system-0.0.1-SNAPSHOT.jar
 ```
 3. **Docker 部署**（可选）：
     - 创建 Dockerfile：
 ```
-dockerfile FROM openjdk:17-jdk-slim COPY target/incident-management-system-0.0.1-SNAPSHOT.jar /app/incident-management-system.jar WORKDIR /app CMD ["java", "-jar", "incident-management-system.jar"]
+dockerfile FROM openjdk:17-jdk-slim COPY target/incident-manage-system-0.0.1-SNAPSHOT.jar /app/incident-manage-system.jar WORKDIR /app CMD ["java", "-jar", "incident-manage-system.jar"]
 ```
 - 构建 Docker 镜像：
 ```
 sh  
-docker build -t incident-management-system .
+docker build -t incident-manage-system .
 ```
 - 运行 Docker 容器：
 ```
 sh  
-docker run -p 8080:8080 incident-management-system
+docker run -p 8080:8080 incident-manage-system
 ```
